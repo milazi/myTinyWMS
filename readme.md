@@ -30,8 +30,17 @@ The easiest way to install it right now is using docker and docker-compose:
 
 ### Development
 
-... todo: fill this stuff ...
-- run `composer install`
+
+- run `npm install husky true-case-path request npmlog`
+- run `husky install`
+- run `npx tailwind init`
+- run `set NODE_OPTIONS=--openssl-legacy-provider`
+- run `npm run production`
+- run `php artisan db:seed`
+- run `composer dump-autoload`
+- run `php artisan telescope:install`
+- run `composer install --ignore-platform-reqs`
+- run `composer update`
 - run `php artisan telescope:publish`
 
 -----

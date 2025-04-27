@@ -184,7 +184,9 @@ create table deliveries
 	delivery_note_number varchar(191) null,
 	notes text null,
 	created_at timestamp null,
-	updated_at timestamp null
+	updated_at timestamp null,
+	deleted_at timestamp null,
+
 )
 collate=utf8mb4_unicode_ci;
 

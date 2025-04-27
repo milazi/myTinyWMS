@@ -2,25 +2,28 @@
 
 namespace Mss\DataTables;
 
-class AssignOrderDataTable extends OrderDataTable {
+use Mss\Models\Order;
 
-    protected $actionView = 'order_messages.order_list_action';
-    protected $pageLength = 30;
-    protected $paging = true;
+class AssignOrderDataTable extends OrderDataTable
+{
+    protected $actionView = 'order_messages.order_list_action'; //  Blade view for the action column.
+    protected $pageLength = 30; // Number of records per page.
+    protected $paging = true; // Enable or disable pagination.
 
     /**
      * Get columns.
      *
+     * Defines the columns to be displayed in the DataTable.
+     *
      * @return array
      */
-    protected function getColumns()
+    protected function getColumns(): array
     {
         return [
-            ['data' => 'internal_order_number', 'name' => 'internal_order_number', 'title' => __('Bestellnummer')],
-            ['data' => 'supplier', 'name' => 'supplier', 'title' => __('Lieferant'), 'visible' => false],
-            ['data' => 'items', 'name' => 'items', 'title' => __('Artikel'), 'searchable' => false],
-            ['data' => 'status', 'name' => 'status', 'title' => __('Status')]
+            ['data' => 'internal_order_number', 'name' => 'internal_order_number', 'title' => __('Order Number')],
+            ['data' => 'supplier', 'name' => 'supplier', 'title' => __('Supplier'), 'visible' => false], // Supplier name, but hidden.
+            ['data' => 'items', 'name' => 'items', 'title' => __('Articles'), 'searchable' => false], //  Articles column, not searchable.
+            ['data' => 'status', 'name' => 'status', 'title' => __('Status')] // Order status.
         ];
     }
-
 }

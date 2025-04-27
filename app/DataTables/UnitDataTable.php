@@ -49,7 +49,7 @@ class UnitDataTable extends BaseDataTable
                 'order'   => [[0, 'asc']],
                 'buttons' => []
             ])
-            ->addAction(['title' => __('Aktion'), 'width' => '150px']);
+            ->addAction(['title' => __('Action'), 'width' => '150px']);
     }
 
     /**

@@ -23,9 +23,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapThree();
 
-        setlocale(LC_TIME, 'de_DE.utf8');
-        date_default_timezone_set('Europe/Berlin');
-        Carbon::setLocale('de');
+        setlocale(LC_TIME, 'en_GB.utf8');
+        date_default_timezone_set('Africa/Cairo');
+        Carbon::setLocale('en');
+
 
         if (env('APP_DEMO')) {
             config(['mail.driver' => 'array']);

@@ -1,16 +1,16 @@
 @extends('unit.form')
 
-@section('title', __('Einheit bearbeiten'))
+@section('title', __('Edit Unit'))
 
 @section('breadcrumb')
     <li>
         <a href="{{ route('admin.index') }}">@lang('Administrator')</a>
     </li>
     <li>
-        <a href="{{ route('unit.index') }}">@lang('Einheiten Übersicht')</a>
+        <a href="{{ route('unit.index') }}">@lang('Units Overview')</a>
     </li>
     <li class="active">
-        <strong>@lang('Einheit bearbeiten')</strong>
+        <strong>@lang('Edit Unit')</strong>
     </li>
 @endsection
 
@@ -19,12 +19,12 @@
 @endsection
 
 @section('submit')
-    {!! Form::submit(__('Speichern'), ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit(__('Save'), ['class' => 'btn btn-primary']) !!}
 @endsection
 
 @section('secondCol')
     <div class="w-1/3 ml-4">
-        <collapse title="@lang('Logbuch')">
+        <collapse title="@lang('Logbook')">
             @include('components.audit_list', $audits)
         </collapse>
     </div>

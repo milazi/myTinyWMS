@@ -2,6 +2,9 @@
 
 namespace Mss\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -14,11 +17,15 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class Delivery extends AuditableModel
 {
+    use SoftDeletes;
+
     protected $fillable = ['delivery_note_number', 'delivery_date', 'notes', 'order_id'];
     protected $dates = ['delivery_date'];
 
     /**
      * The "booted" method of the model.
+     *
+     * This method is called when the model is booted.  It defines a 'deleted' event.
      *
      * @return void
      */
@@ -28,6 +35,7 @@ class Delivery extends AuditableModel
 
         static::deleted(function ($delivery) {
             /** @var Delivery $delivery */
+            // Adjust the order status when a delivery is deleted.
             if ($delivery->order->isFullyDelivered()) {
                 $delivery->order->status = Order::STATUS_DELIVERED;
             } elseif ($delivery->order->isPartiallyDelivered()) {
@@ -40,19 +48,43 @@ class Delivery extends AuditableModel
         });
     }
 
-    public static function getFieldNames() {
+    /**
+     * Returns the field names for this model.
+     *
+     * @return array
+     */
+    public static function getFieldNames(): array
+    {
         return [];
     }
 
-    public static function getAuditName() {
-        return __('Lieferung');
+    /**
+     * Returns the audit name for this model.
+     *
+     * @return string
+     */
+    public static function getAuditName(): string
+    {
+        return __('Delivery');
     }
 
-    public function order() {
+    /**
+     * Defines the relationship with Order.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function order()
+    {
         return $this->belongsTo(Order::class);
     }
 
-    public function items() {
+    /**
+     * Defines the relationship with DeliveryItem.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function items()
+    {
         return $this->hasMany(DeliveryItem::class);
     }
 }

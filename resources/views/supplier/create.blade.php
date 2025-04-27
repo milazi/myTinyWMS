@@ -1,13 +1,13 @@
 @extends('supplier.form')
 
-@section('title', __('Neuer Lieferant'))
+@section('title', __('New Supplier'))
 
 @section('breadcrumb')
     <li>
-        <a href="{{ route('supplier.index') }}">@lang('Übersicht')</a>
+        <a href="{{ route('supplier.index') }}">@lang('Overview')</a>
     </li>
     <li class="active">
-        <strong>@lang('Neuer Lieferant')</strong>
+        <strong>@lang('New Supplier')</strong>
     </li>
 @endsection
 
@@ -16,5 +16,5 @@
 @endsection
 
 @section('submit')
-    {!! Form::submit(__('Speichern'), ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit(__('Save'), ['class' => 'btn btn-primary']) !!}
 @endsection

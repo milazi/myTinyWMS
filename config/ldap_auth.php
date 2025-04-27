@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'model' => Mss\Models\User::class,
+    'model' => App\User::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
 
         // Only allows users with a user principal name to authenticate.
         // Suitable when using ActiveDirectory.
-         Adldap\Laravel\Scopes\UpnScope::class,
+        // Adldap\Laravel\Scopes\UpnScope::class,
 
         // Only allows users with a uid to authenticate.
         // Suitable when using OpenLDAP.
@@ -290,7 +290,7 @@ return [
     'sync_attributes' => [
 
         'email' => 'userprincipalname',
-        'username' => 'samaccountname',
+
         'name' => 'cn',
 
     ],

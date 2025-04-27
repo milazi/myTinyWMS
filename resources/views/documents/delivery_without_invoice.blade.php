@@ -52,11 +52,11 @@
         <table cellpadding="0" cellspacing="1">
             <thead>
                 <tr>
-                    <th>@lang('Artikel')</th>
-                    <th>@lang('Bestellung')</th>
-                    <th>@lang('Lieferant')</th>
-                    <th>@lang('Lieferzeitpunkt')</th>
-                    <th>@lang('Bestellwert')</th>
+                    <th>@lang('Article')</th>
+                    <th>@lang('Order')</th>
+                    <th>@lang('Supplier')</th>
+                    <th>@lang('Delivery Date')</th>
+                    <th>@lang('Order Value')</th>
                 </tr>
             </thead>
             <tbody>

@@ -1,4 +1,4 @@
-<td class="bg-default text-center" title="@lang('Außenlager')">
+<td class="bg-default text-center" title="@lang('External warehouse')">
     {{ \Mss\Models\ArticleQuantityChangelog::getAbbreviation(\Mss\Models\ArticleQuantityChangelog::TYPE_OUTSOURCING) }}
 </td>
 <td class="text-{{  $log->change >= 0 ? 'success' : 'danger' }} text-center"><i>{{ $log->change >= 0 ? '+'.$log->change : $log->change }}</i></td>

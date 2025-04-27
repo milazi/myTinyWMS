@@ -1,11 +1,11 @@
 <td class="text-nowrap text-center">{{ optional($log->unit)->name }}</td>
-<td class="text-nowrap">{{ $log->created_at->format('d.m.Y H:i') }} Uhr</td>
+<td class="text-nowrap">{{ $log->created_at->format('d.m.Y H:i') }} o'clock</td>
 <td>
     @if ($log->deliveryItem)
         @if ($log->deliveryItem->delivery && $log->deliveryItem->delivery->order)
-            <a href="{{ route('order.show', $log->deliveryItem->delivery->order) }}" target="_blank">{{ $log->note ?? 'Bestellung '.$log->deliveryItem->delivery->order->internal_order_number }}</a>
+            <a href="{{ route('order.show', $log->deliveryItem->delivery->order) }}" target="_blank">{{ $log->note ?? 'Order '.$log->deliveryItem->delivery->order->internal_order_number }}</a>
         @else
-            {{ $log->note ?? 'Bestellung ???' }}</a>
+            {{ $log->note ?? 'Order ???' }}</a>
         @endif
     @else
         {{ $log->note }}

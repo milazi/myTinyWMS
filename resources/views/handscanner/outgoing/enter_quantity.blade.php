@@ -1,7 +1,7 @@
 @extends('layout.handscanner')
 
 @section('subheader')
-    <div class="subheader">Warenausgang - Bestand ändern</div>
+    <div class="subheader">Goods Issue - Change Stock</div>
 @endsection
 
 @section('back', route('handscanner.index'))
@@ -20,19 +20,19 @@
 
                 <div class="row text-left">
                     <div class="col">
-                        <div class="label">Nummer:</div>
+                        <div class="label">Number:</div>
                         <h5>{{ $article->internal_article_number }}</h5>
                     </div>
 
                     <div class="col">
-                        <div class="label">aktueller Bestand:</div>
+                        <div class="label">current stock:</div>
                         <h5>{{ $article->quantity }}</h5>
                     </div>
                 </div>
 
                 <div class="row text-left">
                     <div class="col">
-                        <div class="label">Einheit:</div>
+                        <div class="label">Unit:</div>
                         <h5>{{ optional($article->unit)->name }}</h5>
                     </div>
                 </div>
@@ -40,14 +40,14 @@
                 <div class="row text-left">
                     <div class="col">
                         <div class="form-group">
-                            <label for="quantity">Wieviele Artikel sollen ausgebucht werden:</label>
+                            <label for="quantity">How many articles should be booked out:</label>
                             <input type="number" min="0" inputmode="numeric" pattern="[0-9]*" name="quantity" id="quantity" required class="form-control form-control-lg">
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-lg btn-success" id="changelogSubmit">Speichern</button>
-                <a href="{{ route('handscanner.outgoing.start') }}" class="btn btn-lg btn-secondary pull-right">Abbrechen</a>
+                <button type="submit" class="btn btn-lg btn-success" id="changelogSubmit">Save</button>
+                <a href="{{ route('handscanner.outgoing.start') }}" class="btn btn-lg btn-secondary pull-right">Cancel</a>
             </form>
         </div>
     </div>

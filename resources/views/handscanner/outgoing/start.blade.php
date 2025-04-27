@@ -1,7 +1,7 @@
 @extends('layout.handscanner')
 
 @section('subheader')
-    <div class="subheader">Warenausgang - Artikel scannen</div>
+    <div class="subheader">Goods Issue - Scan Article</div>
 @endsection
 
 @section('back', route('handscanner.index'))
@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h5 class="text-center mb-4 mt-5">Bitte einen Artikel scannen</h5>
+            <h5 class="text-center mb-4 mt-5">Please scan an article</h5>
         </div>
     </div>
 @endsection

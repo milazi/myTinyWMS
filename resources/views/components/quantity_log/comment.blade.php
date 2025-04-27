@@ -1,4 +1,4 @@
-<td class="bg-default text-center" title="@lang('Kommentar')">
+<td class="bg-default text-center" title="@lang('Comment')">
     {{ \Mss\Models\ArticleQuantityChangelog::getAbbreviation(\Mss\Models\ArticleQuantityChangelog::TYPE_COMMENT) }}
 </td>
 <td class="text-info text-center"></td>

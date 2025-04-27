@@ -1,13 +1,13 @@
 @extends('layout.app')
 
-@section('title', __('Wareneingänge ohne Rechnung'))
+@section('title', __('Goods Receipts without Invoice'))
 
 @section('breadcrumb')
     <li>
         <a href="{{ route('reports.index') }}">@lang('Reports')</a>
     </li>
     <li class="active">
-        <strong>@lang('Wareneingänge ohne Rechnung')</strong>
+        <strong>@lang('Goods Receipts without Invoice')</strong>
     </li>
 @endsection
 
@@ -20,11 +20,11 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>@lang('Artikel')</th>
-                                    <th>@lang('Bestellung')</th>
-                                    <th>@lang('Lieferant')</th>
-                                    <th>@lang('Lieferzeitpunkt')</th>
-                                    <th>@lang('Bestellwert')</th>
+                                    <th>@lang('Article')</th>
+                                    <th>@lang('Order')</th>
+                                    <th>@lang('Supplier')</th>
+                                    <th>@lang('Delivery Date')</th>
+                                    <th>@lang('Order Value')</th>
                                 </tr>
                             </thead>
                             <tbody>

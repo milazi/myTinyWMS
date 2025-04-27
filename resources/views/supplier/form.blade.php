@@ -12,11 +12,11 @@
 
                     {{ Form::bsText('name', null, [], __('Name')) }}
                     {{ Form::bsText('email', null, [], __('E-Mail')) }}
-                    {{ Form::bsText('phone', null, [], __('Telefon')) }}
-                    {{ Form::bsText('contact_person', null, [], __('Kontaktperson')) }}
-                    {{ Form::bsText('website', null, [], __('Webseite')) }}
-                    {{ Form::bsText('accounts_payable_number', null, [], __('Kreditorennummer')) }}
-                    {{ Form::bsTextarea('notes', null, [], __('Bemerkungen')) }}
+                    {{ Form::bsText('phone', null, [], __('Phone')) }}
+                    {{ Form::bsText('contact_person', null, [], __('Contact Person')) }}
+                    {{ Form::bsText('website', null, [], __('Website')) }}
+                    {{ Form::bsText('accounts_payable_number', null, [], __('Accounts Payable Number')) }}
+                    {{ Form::bsTextarea('notes', null, [], __('Notes')) }}
 
                     <div class="form-group">
                         @yield('submit')

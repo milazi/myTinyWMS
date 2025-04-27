@@ -1,16 +1,16 @@
 @extends('order.form')
 
-@section('title', __('Bestellung bearbeiten'))
+@section('title', __('Edit Order'))
 
 @section('breadcrumb')
     <li>
-        <a href="{{ route('order.index') }}">@lang('Übersicht')</a>
+        <a href="{{ route('order.index') }}">@lang('Overview')</a>
     </li>
     <li>
-        <a href="{{ route('order.show', $order) }}">@lang('Bestellung') #{{ $order->internal_order_number }}</a>
+        <a href="{{ route('order.show', $order) }}">@lang('Order') #{{ $order->internal_order_number }}</a>
     </li>
     <li class="active">
-        <strong>@lang('Bestellung bearbeiten')</strong>
+        <strong>@lang('Edit Order')</strong>
     </li>
 @endsection
 
@@ -19,5 +19,5 @@
 @endsection
 
 @section('submit')
-    {!! Form::submit('Speichern', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
 @endsection

@@ -6,19 +6,19 @@
 
     <div class="flex">
         <div class="card w-1/5 p-4 mb-8">
-            <div class="text-sm text-gray-500 font-bold tracking-wide">@lang('Anzahl Artikel')</div>
+            <div class="text-sm text-gray-500 font-bold tracking-wide">@lang('Number of Articles')</div>
             <div class="text-3xl font-bold text-black">{{ $stats['article_count'] }}</div>
         </div>
 
         <div class="card w-1/5 p-4 mb-8 ml-4">
-            <div class="text-sm text-gray-500 font-bold tracking-wide">@lang('Summe Warenbestand')</div>
+            <div class="text-sm text-gray-500 font-bold tracking-wide">@lang('Total Stock Value')</div>
             <div class="text-3xl font-bold text-black">{!! formatPrice($stats['total_value']) !!}</div>
         </div>
     </div>
 
     <div class="card mb-4">
         <div class="card-header">
-            @lang('zu Bestellen')
+            @lang('To Order')
         </div>
         <div class="card-content">
             {!! Form::open(['route' => ['order.create_post'], 'method' => 'POST']) !!}
@@ -29,7 +29,7 @@
 
     @can('order.create')
     <div class="footer_actions hidden">
-        <button class="btn btn-xs btn-secondary" type="submit" id="create_new_order">@lang('Bestellung erstellen')</button>
+        <button class="btn btn-xs btn-secondary" type="submit" id="create_new_order">@lang('Create Order')</button>
     </div>
     @endcan
 
@@ -38,14 +38,14 @@
         <div class="w-1/2 px-2 mb-4">
             <div class="card">
                 <div class="card-header">
-                    @lang('Rechnungen ohne Wareneingang')
+                    @lang('Invoices without Goods Receipt')
                 </div>
                 <div class="card-content">
                     <table class="dataTable">
                         <thead>
                         <tr>
-                            <th>@lang('Artikel')</th>
-                            <th>@lang('Bestellung')</th>
+                            <th>@lang('Article')</th>
+                            <th>@lang('Order')</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -70,15 +70,15 @@
             <div class="w-1/2 px-2 mb-4">
                 <div class="card">
                     <div class="card-header">
-                        @lang('Bestellungen ohne AB')
+                        @lang('Orders without Order Confirmation')
                     </div>
                     <div class="card-content">
                         <table class="dataTable">
                             <thead>
                             <tr>
-                                <th>@lang('Bestellung')</th>
-                                <th>@lang('Lieferant')</th>
-                                <th>@lang('Bestellzeitpunkt')</th>
+                                <th>@lang('Order')</th>
+                                <th>@lang('Supplier')</th>
+                                <th>@lang('Order Date')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -102,15 +102,15 @@
             <div class="w-1/2 px-2 mb-4">
                 <div class="card">
                     <div class="card-header">
-                        @lang('Überfällige Bestellungen')
+                        @lang('Overdue Orders')
                     </div>
                     <div class="card-content">
                         <table class="dataTable">
                             <thead>
                             <tr>
-                                <th>@lang('Bestellung')</th>
-                                <th>@lang('Lieferant')</th>
-                                <th>@lang('Lieferzeitpunkt')</th>
+                                <th>@lang('Order')</th>
+                                <th>@lang('Supplier')</th>
+                                <th>@lang('Delivery Date')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -134,17 +134,17 @@
         <div class="w-1/2 px-2 mb-4">
             <div class="card">
                 <div class="card-header">
-                    @lang('Wareneingänge ohne Rechnung')
+                    @lang('Goods Receipts without Invoice')
                 </div>
                 <div class="card-content">
                     <table class="dataTable">
                         <thead>
                         <tr>
-                            <th>@lang('Artikel')</th>
-                            <th>@lang('Bestellung')</th>
-                            <th>@lang('Lieferant')</th>
-                            <th>@lang('Lieferzeitpunkt')</th>
-                            <th>@lang('Bestellwert')</th>
+                            <th>@lang('Article')</th>
+                            <th>@lang('Order')</th>
+                            <th>@lang('Supplier')</th>
+                            <th>@lang('Delivery Date')</th>
+                            <th>@lang('Order Value')</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -183,15 +183,15 @@
         <div class="w-1/2 px-2 mb-4">
             <div class="card">
                 <div class="card-header">
-                    @lang('Bestellungen ohne E-Mail')
+                    @lang('Orders without E-Mail')
                 </div>
                 <div class="card-content">
                     <table class="dataTable">
                         <thead>
                         <tr>
-                            <th>@lang('Bestellung')</th>
-                            <th>@lang('Lieferant')</th>
-                            <th>@lang('Lieferzeitpunkt')</th>
+                            <th>@lang('Order')</th>
+                            <th>@lang('Supplier')</th>
+                            <th>@lang('Delivery Date')</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -201,7 +201,7 @@
                                     <a href="{{ route('order.show', $order) }}" target="_blank">{{ $order->internal_order_number }}</a>
                                 </td>
                                 <td>{{ $order->supplier->name }}</td>
-                                <td>{{ optional($order->items->max('expected_delivery'))->format('d.m.Y') }}</td>
+                                 <td>{{ optional($order->items->max('expected_delivery'))->format('d.m.Y') }}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -217,6 +217,7 @@
     {!! $dataTable->scripts() !!}
     <script>
         var currentlySelectedSupplier = null;
+
         $(document).ready(function () {
             $('.dataTable').on("click", 'input[type="checkbox"]', function () {
                 if ($('input[name="article[]"]:checked').length === 0) {
@@ -224,7 +225,7 @@
                     $('.dataTable input[type="checkbox"]').attr('disabled', false).attr('title', '');
                 } else {
                     currentlySelectedSupplier = $(this).parent().parent().attr('data-supplier');
-                    $('.dataTable tbody tr[data-supplier!=' + currentlySelectedSupplier + '] input[type="checkbox"]').attr('disabled', true).attr('title', 'Es können nur Artikel eines Herstellers ausgewählt werden');
+                    $('.dataTable tbody tr[data-supplier!=' + currentlySelectedSupplier + '] input[type="checkbox"]').attr('disabled', true).attr('title', 'Only articles from the same supplier can be selected');
                 }
             });
         });

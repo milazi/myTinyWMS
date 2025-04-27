@@ -5,11 +5,11 @@
                 <div class="flex-1">
                     <div class="form-group">
                         <label class="form-label">
-                            {{ $t('Artikel') }}
+                            {{ $t('Article') }}
 
                             <dot-menu direction="right" class="article-menu">
-                                <a v-if="supplier" v-bind:class="{ 'm-l-md': (article.id), 'change-article': true }" @click.prevent="showArticleList(index)">{{ $t('Artikel ändern') }}</a>
-                                <a @click.prevent="removeArticle(index)" class="delete-article">{{ $t('Artikel löschen') }}</a>
+                                <a v-if="supplier" v-bind:class="{ 'm-l-md': (article.id), 'change-article': true }" @click.prevent="showArticleList(index)">{{ $t('Change article') }}</a>
+                                <a @click.prevent="removeArticle(index)" class="delete-article">{{ $t('Delete article') }}</a>
                             </dot-menu>
                         </label>
                         <div class="form-control-static article-name">
@@ -23,19 +23,19 @@
                 </div>
                 <div class="w-48 mr-4 text-right">
                     <div class="form-group">
-                        <label for="quantity[]" class="form-label">{{ $t('Menge') }}</label>
+                        <label for="quantity[]" class="form-label">{{ $t('Quantity') }}</label>
                         <input class="form-input text-right quantity-select" required="required" name="quantity[]" id="quantity[]" type="text" v-model="article.quantity">
                     </div>
                 </div>
                 <div class="w-48 mr-4 text-right">
                     <div class="form-group">
-                        <label for="price[]" class="form-label">{{ $t('Preis netto je Einheit') }}</label>
+                        <label for="price[]" class="form-label">{{ $t('Net price per unit') }}</label>
                         <input class="form-input text-right price-select" required="required" name="price[]" id="price[]" type="text" v-model="article.price">
                     </div>
                 </div>
                 <div class="w-48 text-right">
                     <div class="form-group">
-                        <label :for="'expected_delivery' + index" class="form-label">{{ $t('Liefertermin') }}</label>
+                        <label :for="'expected_delivery' + index" class="form-label">{{ $t('Delivery date') }}</label>
                         <input type="hidden" name="expected_delivery[]" v-model="article.expected_delivery">
                         <date-picker v-model="article.expected_delivery" :id="'expected_delivery' + index" class="deliverydate-input"></date-picker>
                     </div>
@@ -43,8 +43,8 @@
             </div>
         </div>
 
-        <div class="text-red-500" v-if="!supplier">{{ $t('Bitte zuerst einen Lieferanten auswählen!') }}</div>
-        <button class="btn btn-secondary btn-sm" id="add-article" v-if="supplier" @click.prevent="addArticle(true)">{{ $t('Artikel hinzufügen') }}</button>
+        <div class="text-red-500" v-if="!supplier">{{ $t('Please select a supplier first!') }}</div>
+        <button class="btn btn-secondary btn-sm" id="add-article" v-if="supplier" @click.prevent="addArticle(true)">{{ $t('Add article') }}</button>
     </div>
 </template>
 

@@ -1,4 +1,4 @@
-Mit freundlichen Grüßen<br/>
+Sincerely<br/>
 <br/>
 {{ \Illuminate\Support\Facades\Auth::user()->name }}<br>
-Abt. Einkauf<br>
+Purchasing Department<br>

@@ -1,10 +1,10 @@
 <table class="dataTable table-condensed multiRow text-sm">
     <thead>
         <tr>
-            <th>@lang('wann') / @lang('wer')</th>
-            <th>@lang('was')</th>
-            <th>@lang('alt')</th>
-            <th>@lang('neu')</th>
+            <th>@lang('when') / @lang('who')</th>
+            <th>@lang('what')</th>
+            <th>@lang('old')</th>
+            <th>@lang('new')</th>
         </tr>
     </thead>
 
@@ -33,5 +33,3 @@
         </tbody>
     @endforeach
 </table>
-
-

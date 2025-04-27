@@ -1,16 +1,16 @@
 @extends('role.form')
 
-@section('title', __('Neue Rolle'))
+@section('title', __('New Role'))
 
 @section('breadcrumb')
     <li>
         <a href="{{ route('admin.index') }}">@lang('Administrator')</a>
     </li>
     <li>
-        <a href="{{ route('role.index') }}">@lang('Rollen Übersicht')</a>
+        <a href="{{ route('role.index') }}">@lang('Roles Overview')</a>
     </li>
     <li class="active">
-        <strong>@lang('Neue Rolle')</strong>
+        <strong>@lang('New Role')</strong>
     </li>
 @endsection
 
@@ -19,5 +19,5 @@
 @endsection
 
 @section('submit')
-    {!! Form::submit(__('Speichern'), ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit(__('Save'), ['class' => 'btn btn-primary']) !!}
 @endsection

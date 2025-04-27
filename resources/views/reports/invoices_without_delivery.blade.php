@@ -1,13 +1,13 @@
 @extends('layout.app')
 
-@section('title', __('Rechnungen ohne Wareneingang'))
+@section('title', __('Invoices without Goods Receipt'))
 
 @section('breadcrumb')
     <li>
         <a href="{{ route('reports.index') }}">@lang('Reports')</a>
     </li>
     <li class="active">
-        <strong>@lang('Rechnungen ohne Wareneingang')</strong>
+        <strong>@lang('Invoices without Goods Receipt')</strong>
     </li>
 @endsection
 
@@ -20,8 +20,8 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>@lang('Artikel')</th>
-                                    <th>@lang('Bestellung')</th>
+                                    <th>@lang('Article')</th>
+                                    <th>@lang('Order')</th>
                                 </tr>
                             </thead>
                             <tbody>

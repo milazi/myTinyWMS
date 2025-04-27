@@ -38,7 +38,7 @@
         computed: {
             config: function() {
                 let config = {
-                    lang: 'de-DE',
+                    lang: 'en-GB',
                     placeholder: '',
                     height: 800,
                     width: 800,

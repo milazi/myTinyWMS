@@ -1,4 +1,4 @@
-<td class="bg-danger text-center" title="@lang('Warenausgang')">
+<td class="bg-danger text-center" title="@lang('Goods issue')">
     {{ \Mss\Models\ArticleQuantityChangelog::getAbbreviation(\Mss\Models\ArticleQuantityChangelog::TYPE_OUTGOING) }}
 </td>
 <td class="text-danger text-center">{{ $log->change }}</td>

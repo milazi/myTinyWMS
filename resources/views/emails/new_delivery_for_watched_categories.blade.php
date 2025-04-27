@@ -1,9 +1,9 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
     <tr>
         <td align="left" valign="middle" style="font-family: Verdana, Geneva, Helvetica, Arial, sans-serif; font-size: 14px; color: #353535; padding:3%; padding-top:40px; padding-bottom:40px;">
-            <p>@lang('Für folgende Artikel ist soeben eine Lieferung eingegangen.')</p>
+            <p>@lang('A delivery has just arrived for the following articles.')</p>
 
-            <p>@lang('Bitte prüfen:')</p>
+            <p>@lang('Please check:')</p>
         </td>
     </tr>
     <tr>
@@ -11,16 +11,16 @@
             <table width="94%" border="0" cellpadding="0" cellspacing="0" style="border: 1px solid #EEEEEE">
                 <tr>
                     <td width="10%" align="left" bgcolor="#252525" style="font-family: Verdana, Geneva, Helvetica, Arial, sans-serif; font-size: 12px; color: #EEEEEE; padding:10px; padding-right:0;">
-                        <b>@lang('Nr')</b>
+                        <b>@lang('No.')</b>
                     </td>
                     <td width="50%" align="left" bgcolor="#252525" style="font-family: Verdana, Geneva, Helvetica, Arial, sans-serif; font-size: 12px; color: #EEEEEE; padding:10px; padding-right:0;">
-                        <b>@lang('Artikel')</b>
+                        <b>@lang('Article')</b>
                     </td>
                     <td width="10%" align="center" bgcolor="#252525" style="font-family: Verdana, Geneva, Helvetica, Arial, sans-serif; font-size: 12px; color: #EEEEEE; padding:10px; padding-left:0;">
-                        <b>@lang('Menge')</b>
+                        <b>@lang('Quantity')</b>
                     </td>
                     <td width="30%" align="center" bgcolor="#252525" style="font-family: Verdana, Geneva, Helvetica, Arial, sans-serif; font-size: 12px; color: #EEEEEE; padding:10px; padding-left:0;">
-                        <b>@lang('Kategorie')</b>
+                        <b>@lang('Category')</b>
                     </td>
                 </tr>
                 @foreach($articles as $article)

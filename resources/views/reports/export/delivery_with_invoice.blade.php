@@ -1,4 +1,4 @@
-"@lang('Bestellung')","@lang('Artikel')","@lang('Kategorie')","@lang('Lieferant')","@lang('Lieferzeitpunkt')","@lang('Bestellwert')"
+"@lang('Order')","@lang('Article')","@lang('Category')","@lang('Supplier')","@lang('Delivery Date')","@lang('Order Value')"
 @foreach($items as $deliveriesGroup)
 @foreach($deliveriesGroup as $delivery)
 @foreach($delivery->items as $deliveryItem)

@@ -1,9 +1,9 @@
 @extends('layout.app')
 
-@section('title', __('Wareneingänge mit Rechnung - vom :month', ['month' => $start->monthName.' '.$start->year]))
+@section('title', __('Goods Receipts with Invoice - from :month', ['month' => $start->monthName.' '.$start->year]))
 
 @section('title_extra')
-    <a href="{{ route('reports.invoices_with_delivery_export', ['month' => $month, 'category' => $category]) }}" class="btn btn-secondary">@lang('Export als CSV')</a>
+    <a href="{{ route('reports.invoices_with_delivery_export', ['month' => $month, 'category' => $category]) }}" class="btn btn-secondary">@lang('Export as CSV')</a>
 @endsection
 
 @section('breadcrumb')
@@ -11,7 +11,7 @@
         <a href="{{ route('reports.index') }}">@lang('Reports')</a>
     </li>
     <li class="active">
-        <strong>@lang('Wareneingänge mit Rechnung')</strong>
+        <strong>@lang('Goods Receipts with Invoice')</strong>
     </li>
 @endsection
 
@@ -24,12 +24,12 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>@lang('Bestellung')</th>
-                                    <th>@lang('Artikel')</th>
-                                    <th>@lang('Kategorie')</th>
-                                    <th>@lang('Lieferant')</th>
-                                    <th>@lang('Lieferzeitpunkt')</th>
-                                    <th>@lang('Bestellwert')</th>
+                                    <th>@lang('Order')</th>
+                                    <th>@lang('Article')</th>
+                                    <th>@lang('Category')</th>
+                                    <th>@lang('Supplier')</th>
+                                    <th>@lang('Delivery Date')</th>
+                                    <th>@lang('Order Value')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,7 +72,7 @@
                                             @endforeach
                                         @endforeach
                                         @if($itemCount > 1)
-                                        <span class="font-bold border-black border-t-2">&sum; {!! formatPrice($total) !!}</span>
+                                            <span class="font-bold border-black border-t-2">&sum; {!! formatPrice($total) !!}</span>
                                         @endif
                                         @php($grandTotal += $total)
                                     </td>

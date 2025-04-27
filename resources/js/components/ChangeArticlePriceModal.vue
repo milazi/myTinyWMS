@@ -1,23 +1,23 @@
 <template>
     <modal :name="name" height="auto" classes="modal">
-        <h4 class="modal-title text-red-500 font-bold text-xl">{{ $t('Preisänderung!') }}</h4>
+        <h4 class="modal-title text-red-500 font-bold text-xl">{{ $t('Price change!') }}</h4>
 
         <div class="row">
             <div class="w-full">
                 <div class="text-base text-gray-800 tracking-tight" v-if="order !== false">
-                    {{ $t('Der Preis mind. eines Artikels in dieser Bestellung weicht vom aktuellen Artikelpreis ab.') }}<br>
-                    {{ $t('Soll der Artikelpreis angepasst werden?') }}
+                    {{ $t('The price of at least one article in this order deviates from the current article price.') }}<br>
+                    {{ $t('Should the article price be adjusted?') }}
                 </div>
                 <div class="text-base text-gray-800 tracking-tight" v-if="order === false">
-                    {{ $t('Der Preis dieses Artikels in dieser Bestellung weicht vom aktuellen Artikelpreis ab.') }}<br>
-                    {{ $t('Soll der Artikelpreis angepasst werden?') }}
+                    {{ $t('The price of this article in this order deviates from the current article price.') }}<br>
+                    {{ $t('Should the article price be adjusted?') }}
                 </div>
             </div>
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" @click="submit(0)">{{ $t('Nein Artikelpreis nicht ändern') }}</button>
-            <button type="button" class="btn btn-primary" @click="submit(1)">{{ $t('Ja Artikelpreis anpassen') }}</button>
+            <button type="button" class="btn btn-default" @click="submit(0)">{{ $t('No, do not change the article price') }}</button>
+            <button type="button" class="btn btn-primary" @click="submit(1)">{{ $t('Yes, adjust the article price') }}</button>
         </div>
     </modal>
 

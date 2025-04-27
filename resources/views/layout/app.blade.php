@@ -1,6 +1,6 @@
 @inject('globalPageService', 'Mss\Services\GlobalPageService')
 <!DOCTYPE html>
-<html class="h-full tracking-normal antialiased" lang="{{ Config::get('app.locale') }}">
+<html class="h-full tracking-normal antialiased" lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,11 +52,11 @@
             </div>
 
             <p class="footer">
-                © 2019 - {{ date('Y') }} Alexander Reichardt
+                © 2025 - {{ date('Y') }} Alexander Reichardt
                 <span class="px-1">·</span>
                 @lang('Version') {{ config('version.app_version') }} - @lang('build') {{ config('version.build_version') }} ({{ config('version.branch') }})
                 <span class="px-1 print:hidden">·</span>
-                <span class="print:hidden">@lang('Eingeloggt als'): {{ \Illuminate\Support\Facades\Auth::user()->username ?? \Illuminate\Support\Facades\Auth::user()->name }}</span>
+                <span class="print:hidden">@lang('Logged in as'): {{ \Illuminate\Support\Facades\Auth::user()->username ?? \Illuminate\Support\Facades\Auth::user()->name }}</span>
             </p>
         </div>
     </div>

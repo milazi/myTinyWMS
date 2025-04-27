@@ -52,8 +52,8 @@
         <table cellpadding="0" cellspacing="1">
             <thead>
                 <tr>
-                    <th>@lang('Artikel')</th>
-                    <th>@lang('Bestellung')</th>
+                    <th>@lang('Article')</th>
+                    <th>@lang('Order')</th>
                 </tr>
             </thead>
             <tbody>

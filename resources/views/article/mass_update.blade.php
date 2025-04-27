@@ -1,13 +1,13 @@
 @extends('layout.app')
 
-@section('title', __('Artikel-Massenupdate'))
+@section('title', __('Article Mass Update'))
 
 @section('breadcrumb')
     <li>
-        <a href="{{ route('article.index') }}">@lang('Übersicht')</a>
+        <a href="{{ route('article.index') }}">@lang('Overview')</a>
     </li>
     <li class="active">
-        <strong>@lang('Artikel-Massenupdate')</strong>
+        <strong>@lang('Article Mass Update')</strong>
     </li>
 @endsection
 
@@ -25,11 +25,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Artikel</th>
-                                <th width="15%">@lang('Lieferant')</th>
-                                <th width="25%">@lang('Notizen')</th>
-                                <th width="10%">@lang('Einheit')</th>
-                                <th width="10%">@lang('Inventurtyp')</th>
+                                <th>Article</th>
+                                <th width="15%">@lang('Supplier')</th>
+                                <th width="25%">@lang('Notes')</th>
+                                <th width="10%">@lang('Unit')</th>
+                                <th width="10%">@lang('Inventory Type')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,7 +59,7 @@
             <div class="card mt-4">
                 <div class="card-content">
                     {{ csrf_field() }}
-                    <button type="submit" class="btn btn-primary" id="submit">@lang('Speichern')</button>
+                    <button type="submit" class="btn btn-primary" id="submit">@lang('Save')</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<td class="bg-success text-center" title="@lang('Wareneingang')">
+<td class="bg-success text-center" title="@lang('Goods receipt')">
     {{ \Mss\Models\ArticleQuantityChangelog::getAbbreviation(\Mss\Models\ArticleQuantityChangelog::TYPE_INCOMING) }}
 </td>
 <td class="text-success text-center">+{{ $log->change }}</td>

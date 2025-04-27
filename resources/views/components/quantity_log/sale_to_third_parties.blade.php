@@ -1,4 +1,4 @@
-<td class="bg-danger text-center" title="@lang('Verkauf an Fremdfirmen')">
+<td class="bg-danger text-center" title="@lang('Sale to third parties')">
     {{ \Mss\Models\ArticleQuantityChangelog::getAbbreviation(\Mss\Models\ArticleQuantityChangelog::TYPE_SALE_TO_THIRD_PARTIES) }}
 </td>
 <td class="text-{{  $log->change >= 0 ? 'success' : 'danger' }} text-center">{{ $log->change >= 0 ? '+'.$log->change : $log->change }}</td>

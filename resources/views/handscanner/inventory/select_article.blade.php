@@ -1,7 +1,7 @@
 @extends('layout.handscanner')
 
 @section('subheader')
-    <div class="subheader">Inventur - Artikel auswählen</div>
+    <div class="subheader">Inventory - Select Article</div>
 @endsection
 
 @section('back', route('handscanner.inventory.select_category', $inventory))
@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h6 class="text-center mb-4 mt-2">Bitte einen Artikel scannen oder auswählen</h6>
+            <h6 class="text-center mb-4 mt-2">Please scan or select an article</h6>
 
             {{--<qr-reader target-url="{{ route('handscanner.inventory.process', [$inventory, '']) }}/" --}}{{--style="height: 200px; width: 200px;"--}}{{--></qr-reader>--}}
 
@@ -26,7 +26,7 @@
                     </a>
                 @endforeach
             @else
-                <div class="jumbotron text-success text-center">Keine Artikel mehr übrig</div>
+                <div class="jumbotron text-success text-center">No articles left</div>
             @endif
         </div>
     </div>
@@ -36,7 +36,7 @@
                 @csrf
                 <br>
                 <br>
-                <button type="submit" class="btn btn-lg btn-danger">Kategorie abschließen</button>
+                <button type="submit" class="btn btn-lg btn-danger">Complete Category</button>
             </form>
         </div>
     </div>

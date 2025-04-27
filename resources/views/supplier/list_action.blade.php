@@ -4,8 +4,8 @@
     {{ csrf_field() }}
 
     @if ($model->articles->count() > 0)
-        <button class="btn-link table-action mt-2" data-toggle="tooltip" data-placement="left" title="Diesem Lieferanten sind noch Artikel zugeordnet. Er kann nicht gelöscht werden!" disabled="disabled">@lang('Löschen')</button>
+        <button class="btn-link table-action mt-2" data-toggle="tooltip" data-placement="left" title="This supplier still has articles assigned. It cannot be deleted!" disabled="disabled">@lang('Delete')</button>
     @else
-        <button class="btn-link table-action mt-2" onclick="return confirm('@lang('Wirklich löschen?')')">@lang('Löschen')</button>
+        <button class="btn-link table-action mt-2" onclick="return confirm('@lang('Are you sure?')')">@lang('Delete')</button>
     @endif
 </form>

@@ -2,6 +2,12 @@
 
 return [
     /*
+     * DataTables JavaScript global namespace.
+     */
+
+    'namespace' => 'LaravelDataTables',
+
+    /*
      * Default table attributes when generating the table.
      */
     'table' => [
@@ -18,7 +24,7 @@ return [
     /*
      * Html builder script template.
      */
-    'script' => 'vendor.datatables.script',
+    'script' => 'datatables::script',
 
     /*
      * Html builder script template for DataTables Editor integration.

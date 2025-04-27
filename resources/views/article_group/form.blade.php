@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-content">
                     {{ Form::bsText('name', null, [], __('Name')) }}
-                    {{ Form::bsText('external_article_number', null, [], __('Externe Artikelnummer')) }}
+                    {{ Form::bsText('external_article_number', null, [], __('External Article Number')) }}
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="w-1/2 mr-4">
             <div class="card">
                 <div class="card-header">
-                    <div>@lang('Artikel')</div>
+                    <div>@lang('Articles')</div>
                 </div>
                 <div class="card-content">
                     <article-group-article-list ref="articleList" id="articleList" :all-articles="{{ json_encode($allArticles) }}" :existing-articles="{{ json_encode($preSetArticles) }}"></article-group-article-list>

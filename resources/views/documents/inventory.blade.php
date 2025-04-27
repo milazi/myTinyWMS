@@ -54,25 +54,25 @@
             <table class="table @if (!$loop->last) break-after @endif" cellpadding="0" cellspacing="1">
                 <thead>
                     <tr>
-                        <th style="width: 30px">@lang('Art. Nummer')</th>
-                        <th style="width: 200px">@lang('Artikel')</th>
-                        <th class="text-center" style="width: 40px">@lang('SOLL')</th>
-                        <th class="text-center" style="width: 60px">@lang('IST')</th>
-                        <th class="text-center" style="width: 30px">@lang('Einheit')</th>
-                        <th>@lang('Bemerkung')</th>
+                        <th style="width: 30px">@lang('Art. No.')</th>
+                        <th style="width: 200px">@lang('Article')</th>
+                        <th class="text-center" style="width: 40px">@lang('SHOULD')</th>
+                        <th class="text-center" style="width: 60px">@lang('IS')</th>
+                        <th class="text-center" style="width: 30px">@lang('Unit')</th>
+                        <th>@lang('Comment')</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($articles as $article)
-                    <tr>
-                        <td class="text-center">{{ $article->internal_article_number }}</td>
-                        <td>{{ $article->name }}</td>
-                        <td class="text-center">{{ $article->quantity }}</td>
-                        <td></td>
-                        <td>{{ optional($article->unit)->name }}</td>
-                        <td>{{ $article->notes }}</td>
-                    </tr>
-                @endforeach
+                    @foreach($articles as $article)
+                        <tr>
+                            <td class="text-center">{{ $article->internal_article_number }}</td>
+                            <td>{{ $article->name }}</td>
+                            <td class="text-center">{{ $article->quantity }}</td>
+                            <td></td>
+                            <td>{{ optional($article->unit)->name }}</td>
+                            <td>{{ $article->notes }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         @endforeach

@@ -54,73 +54,140 @@ class Article extends AuditableModel
     const PACKAGING_CATEGORY_PLASTIC = 'plastic';
     const PACKAGING_CATEGORY_METAL = 'metal';
 
-    protected $fillable = ['name', 'internal_article_number', 'external_article_number', 'unit_id', 'category_id', 'status', 'quantity', 'min_quantity', 'usage_quantity', 'issue_quantity', 'sort_id', 'inventory', 'notes', 'order_notes', 'free_lines_in_printed_list', 'cost_center', 'weight', 'packaging_category', 'delivery_notes'];
-
-    protected $casts = [
-        'files' => 'array'
+    protected $fillable = [
+        'name', 'internal_article_number', 'external_article_number', 'unit_id', 'category_id', 'status', 'quantity',
+        'min_quantity', 'usage_quantity', 'issue_quantity', 'sort_id', 'inventory', 'notes', 'order_notes',
+        'free_lines_in_printed_list', 'cost_center', 'weight', 'packaging_category', 'delivery_notes'
     ];
 
-    protected $dates = ['deleted_at'];
+    protected $casts = [
+        'files' => 'array' // Cast 'files' attribute to an array
+    ];
 
-    protected $hidden = ['files'];
+    protected $dates = ['deleted_at']; // Treat 'deleted_at' as a Carbon date
 
-    public static function getFieldNames() {
+    protected $hidden = ['files']; // Hide 'files' attribute from serialization
+
+    /**
+     * Returns an array of field names and their corresponding translatable labels.
+     *
+     * @return array
+     */
+    public static function getFieldNames(): array
+    {
         return [
             'name' => __('Name'),
-            'notes' => __('Bemerkungen'),
-            'external_article_number' => __('Externe Artikelnummer'),
-            'internal_article_number' => __('Interne Artikelnummer'),
-            'article_number' => __('Interne Artikelnummer'),    // for the old column name
+            'notes' => __('Notes'),
+            'external_article_number' => __('External Article Number'),
+            'internal_article_number' => __('Internal Article Number'),
+            'article_number' => __('Internal Article Number'), // for the old column name
             'status' => __('Status'),
-            'unit_id' => __('Einheit'),
-            'quantity' => __('Bestand'),
-            'min_quantity' => __('Mindestbestand'),
-            'issue_quantity' => __('Entnahmemenge'),
-            'order_notes' => __('Bestellhinweise'),
-            'category_id' => __('Kategorie'),
-            'sort_id' => __('Sortierung'),
-            'inventory' => __('Inventurtyp'),
-            'inventory_text' => __('Inventurtyp'),
-            'files' => __('Dateien'),
-            'cost_center' => __('Kostenstelle'),
-            'packaging_category' => __('Verpackungs-Kategorie'),
-            'free_lines_in_printed_list' => __('Leere Zeilen in Lagerliste'),
-            'delivery_notes' => __('Liefer Hinweise')
+            'unit_id' => __('Unit'),
+            'quantity' => __('Stock'),
+            'min_quantity' => __('Minimum Stock'),
+            'issue_quantity' => __('Issue Quantity'),
+            'order_notes' => __('Order Notes'),
+            'category_id' => __('Category'),
+            'sort_id' => __('Sort'),
+            'inventory' => __('Inventory Type'),
+            'inventory_text' => __('Inventory Type'),
+            'files' => __('Files'),
+            'cost_center' => __('Cost Center'),
+            'packaging_category' => __('Packaging Category'),
+            'free_lines_in_printed_list' => __('Free Lines in Printed List'),
+            'delivery_notes' => __('Delivery Notes')
         ];
     }
 
-    public static function getAuditName() {
-        return __('Artikel');
+    /**
+     * Returns the translatable name for auditing.
+     *
+     * @return string
+     */
+    public static function getAuditName(): string
+    {
+        return __('Article');
     }
 
-    public function articleGroupItems() {
+    /**
+     * Defines the relationship with ArticleGroupItems.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articleGroupItems()
+    {
         return $this->hasMany(ArticleGroupItem::class);
     }
 
-    public function quantityChangelogs() {
+    /**
+     * Defines the relationship with ArticleQuantityChangelogs.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function quantityChangelogs()
+    {
         return $this->hasMany(ArticleQuantityChangelog::class);
     }
 
-    public function tags() {
+     /**
+     * Defines the relationship with Tags.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function tags()
+    {
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    public function unit() {
+    /**
+     * Defines the relationship with Unit.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function unit()
+    {
         return $this->belongsTo(Unit::class);
     }
 
-    public function supplierArticles() {
+    /**
+     * Defines the relationship with ArticleSuppliers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function supplierArticles()
+    {
         return $this->hasMany(ArticleSupplier::class);
     }
 
-    public function suppliers() {
-        return $this->belongsToMany(Supplier::class)->withTimestamps()->withPivot('order_number', 'price', 'delivery_time', 'order_quantity')->using(ArticleSupplier::class);
+    /**
+     * Defines the relationship with Suppliers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function suppliers()
+    {
+        return $this->belongsToMany(Supplier::class)
+            ->withTimestamps()
+            ->withPivot('order_number', 'price', 'delivery_time', 'order_quantity')
+            ->using(ArticleSupplier::class);
     }
 
-    public function currentSupplier() {
+     /**
+     * Defines the relationship with the current Supplier.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function currentSupplier()
+    {
         return $this->hasOne(Supplier::class, 'id', 'current_supplier_id')->withTrashed();
     }
 
+    /**
+      * Scope a query to include supplier name.
+      *
+      * @param  \Illuminate\Database\Eloquent\Builder  $query
+      * @return \Illuminate\Database\Eloquent\Builder
+      */
     public function scopeWithCurrentSupplierName($query)
     {
         $query->addSubSelect('supplier_name', Supplier::select('name')
@@ -128,6 +195,12 @@ class Article extends AuditableModel
         );
     }
 
+    /**
+     * Scope a query to include the current supplier.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeWithCurrentSupplier($query)
     {
         $query->addSubSelect('current_supplier_id', ArticleSupplier::select('supplier_id')
@@ -139,7 +212,8 @@ class Article extends AuditableModel
     /**
      * @return ArticleSupplier
      */
-    public function currentSupplierArticle() {
+    public function currentSupplierArticle()
+    {
         return $this->hasOne(ArticleSupplier::class, 'id', 'current_supplier_article_id');
     }
 
@@ -151,27 +225,64 @@ class Article extends AuditableModel
         )->with('currentSupplierArticle');
     }
 
-    public function getCurrentSupplierArticle() {
+     /**
+     * Retrieves the current supplier article.
+     *
+     * @return ArticleSupplier
+     */
+    public function getCurrentSupplierArticle()
+    {
         return Article::where('id', $this->id)->withCurrentSupplierArticle()->first()->currentSupplierArticle;
     }
 
-    public function category() {
+    /**
+     * Defines the relationship with Category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function articleNotes() {
+    /**
+     * Defines the relationship with ArticleNotes.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articleNotes()
+    {
         return $this->hasMany(ArticleNote::class);
     }
 
-    public function orderItems() {
+    /**
+     * Defines the relationship with OrderItems.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderItems()
+    {
         return $this->hasMany(OrderItem::class);
     }
 
-    public function formatQuantity($value) {
-        return (!empty($value) || $value === 0) ? $value.' '.$this->unit->name : $value;
+    /**
+     * Formats the quantity with the unit name.
+     *
+     * @param mixed $value
+     * @return string
+     */
+    public function formatQuantity($value): string
+    {
+        return (!empty($value) || $value === 0) ? $value . ' ' . $this->unit->name : $value;
     }
 
-    public function setNewArticleNumber() {
+    /**
+     * Sets a new article number for the article.
+     *
+     * @return bool
+     */
+    public function setNewArticleNumber(): bool
+    {
         if (!$this->category) {
             return false;
         }
@@ -180,7 +291,7 @@ class Article extends AuditableModel
         $this->save();
 
         $categoryPart = $this->category->id + 10;
-        $latestArticleNumber = Article::where('internal_article_number', 'like', $categoryPart.'%')->max('internal_article_number');
+        $latestArticleNumber = Article::where('internal_article_number', 'like', $categoryPart . '%')->max('internal_article_number');
         if ($latestArticleNumber) {
             $number = intval(substr($latestArticleNumber, strlen($categoryPart)));
             $newNumber = ++$number;
@@ -188,18 +299,23 @@ class Article extends AuditableModel
             $newNumber = 1;
         }
 
-        $this->internal_article_number = $categoryPart.sprintf('%03d', $newNumber);
+        $this->internal_article_number = $categoryPart . sprintf('%03d', $newNumber);
         $this->save();
+        return true;
     }
 
     /**
+     * Changes the quantity of the article and creates a changelog entry.
+     *
      * @param integer $change
      * @param integer $type
      * @param string $note
      * @param DeliveryItem|null $deliveryItem
      * @param integer|null $relatedId
+     * @return void
      */
-    public function changeQuantity($change, $type, $note = '', $deliveryItem = null, $relatedId = null) {
+    public function changeQuantity(int $change, int $type, string $note = '', DeliveryItem $deliveryItem = null, ?int $relatedId = null): void
+    {
         switch ($type) {
             case ArticleQuantityChangelog::TYPE_REPLACEMENT_DELIVERY:
                 $newQuantity = $this->quantity;
@@ -220,7 +336,10 @@ class Article extends AuditableModel
         if ($type == ArticleQuantityChangelog::TYPE_CORRECTION && !empty($relatedId)) {
             $relatedItem = ArticleQuantityChangelog::find($relatedId);
             if ($relatedItem && $relatedItem->created_at->format('Y-m') !== Carbon::now()->format('Y-m')) {
-                Notification::send(UserSettings::getUsersWhereTrue(UserSettings::SETTING_NOTIFY_ABOUT_CORRECTION_ON_CHANGE_OF_OTHER_MONTH), new NewCorrectionForChangeFromDifferentMonth($this));
+                Notification::send(
+                    UserSettings::getUsersWhereTrue(UserSettings::SETTING_NOTIFY_ABOUT_CORRECTION_ON_CHANGE_OF_OTHER_MONTH),
+                    new NewCorrectionForChangeFromDifferentMonth($this)
+                );
             }
         }
 
@@ -242,87 +361,125 @@ class Article extends AuditableModel
         $this->save();
     }
 
-    public function resetQuantityFromChangelog(ArticleQuantityChangelog $articleQuantityChangelog) {
+     /**
+     * Resets the quantity based on a given ArticleQuantityChangelog.
+     *
+     * @param ArticleQuantityChangelog $articleQuantityChangelog
+     * @return void
+     */
+    public function resetQuantityFromChangelog(ArticleQuantityChangelog $articleQuantityChangelog): void
+    {
         if (!in_array($articleQuantityChangelog->type, [ArticleQuantityChangelog::TYPE_REPLACEMENT_DELIVERY, ArticleQuantityChangelog::TYPE_OUTSOURCING])) {
             $change = $articleQuantityChangelog->change * -1;
             $this->quantity += $change;
-        } elseif($articleQuantityChangelog->type == ArticleQuantityChangelog::TYPE_OUTSOURCING) {
+        } elseif ($articleQuantityChangelog->type == ArticleQuantityChangelog::TYPE_OUTSOURCING) {
             $this->outsourcing_quantity += $articleQuantityChangelog->change;
-        } elseif($articleQuantityChangelog->type == ArticleQuantityChangelog::TYPE_REPLACEMENT_DELIVERY) {
+        } elseif ($articleQuantityChangelog->type == ArticleQuantityChangelog::TYPE_REPLACEMENT_DELIVERY) {
             $this->replacement_delivery_quantity += $articleQuantityChangelog->change;
         }
         $this->save();
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * Scope a query to include only enabled articles.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeEnabled($query) {
+    public function scopeEnabled($query): Builder
+    {
         return $query->whereIn('status', [self::STATUS_ACTIVE, self::STATUS_NO_ORDERS]);
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * Scope a query to include only active articles.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeActive($query) {
+    public function scopeActive($query): Builder
+    {
         return $query->where('status', self::STATUS_ACTIVE);
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * Scope a query to order articles by name.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOrderedByName($query) {
+    public function scopeOrderedByName($query): Builder
+    {
         return $query->orderBy('name');
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     /**
+     * Scope a query to order articles by article number.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOrderedByArticleNumber($query) {
+    public function scopeOrderedByArticleNumber($query): Builder
+    {
         return $query->orderBy('internal_article_number');
     }
 
     /**
+     * Returns an array of status texts.
+     *
      * @return array
      */
-    public static function getStatusTextArray() {
+    public static function getStatusTextArray(): array
+    {
         return [
-            self::STATUS_ACTIVE => __('aktiv'),
-            self::STATUS_INACTIVE => __('deaktiviert'),
-            self::STATUS_NO_ORDERS => __('Bestellstopp')
+            self::STATUS_ACTIVE => __('active'),
+            self::STATUS_INACTIVE => __('inactive'),
+            self::STATUS_NO_ORDERS => __('Order stop')
         ];
     }
 
     /**
+     * Returns an array of inventory type texts.
+     *
      * @return array
      */
-    public static function getInventoryTextArray() {
+    public static function getInventoryTextArray(): array
+    {
         return [
-            self::INVENTORY_TYPE_SPARE_PARTS => __('Ersatzteile'),
-            self::INVENTORY_TYPE_CONSUMABLES => __('Verbrauchsartikel')
+            self::INVENTORY_TYPE_SPARE_PARTS => __('Spare parts'),
+            self::INVENTORY_TYPE_CONSUMABLES => __('Consumables')
         ];
     }
 
-    /**
+     /**
+     * Retrieves a short changelog for the article.
+     *
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
      */
-    public function getShortChangelog() {
+    public function getShortChangelog()
+    {
         return $this->quantityChangelogs()->with(['user', 'deliveryItem.delivery.order', 'unit', 'related'])->latest()->take(30)->get();
     }
 
-    /**
+     /**
+     * Retrieves open order items for the article.
+     *
      * @return mixed
      */
-    public function openOrderItems() {
+    public function openOrderItems()
+    {
         return $this->belongsToMany(Order::class, 'order_items', 'article_id', 'order_id')->with('items.order.deliveries')->statusOpen();
     }
 
-    public function openOrders() {
+     /**
+     * Retrieves open orders for the article.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function openOrders()
+    {
         return $this->openOrderItems->filter(function ($order) {
+            /* @var $order Order */
             return $order->items->where('article_id', $this->id)->filter(function ($item) {
                 /* @var $item OrderItem */
                 return ($item->quantity != $item->getQuantityDelivered());
@@ -330,10 +487,11 @@ class Article extends AuditableModel
         });
     }
 
-    /**
+     /**
      * {@inheritdoc}
      */
-    public function transformAudit(array $data): array {
+    public function transformAudit(array $data): array
+    {
         if (Arr::has($data, 'new_values.unit_id')) {
             $data['old_values']['unit_id'] = optional(Unit::find($this->getOriginal('unit_id')))->name;
             $data['new_values']['unit_id'] = optional(Unit::find($this->getAttribute('unit_id')))->name;
@@ -359,48 +517,98 @@ class Article extends AuditableModel
         return $data;
     }
 
-    protected function getAuditMappings() {
+     /**
+     * Defines the audit mappings.
+     *
+     * @return array
+     */
+    protected function getAuditMappings(): array
+    {
         return [
             'status' => [
-                0 => [0, '0', 'deaktiviert', 'disabled'],
-                1 => [1, '1', 'aktiv', 'active'],
-                2 => [2, '2', 'Bestellstopp', 'Order stop']
+                0 => [0, '0', 'inactive', 'inactive'],
+                1 => [1, '1', 'active', 'active'],
+                2 => [2, '2', 'Order stop', 'Order stop']
             ]
         ];
     }
 
-    public function getLatestReceipt() {
+     /**
+     * Gets the latest receipt for the article.
+     *
+     * @return ArticleQuantityChangelog|null
+     */
+    public function getLatestReceipt(): ?ArticleQuantityChangelog
+    {
         return $this->quantityChangelogs()->where('type', ArticleQuantityChangelog::TYPE_INCOMING)->latest()->first();
     }
 
-    public function scopeWithAverageUsage($query, $months = 12) {
-        $query->addSubSelect('average_usage_'.$months, ArticleQuantityChangelog::select(DB::raw('COALESCE(ROUND(ABS(SUM(`change`)) / '.$months.'), 0)'))
-            ->whereRaw('articles.id = article_quantity_changelogs.article_id')
-            ->whereIn('type', [ArticleQuantityChangelog::TYPE_OUTGOING, ArticleQuantityChangelog::TYPE_CORRECTION])
-            ->where('change', '<', 0)
-            ->where('created_at', '>', Carbon::now()->subMonth($months))
+     /**
+     * Scope a query to include average usage.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param int $months
+     * @return void
+     */
+    public function scopeWithAverageUsage($query, int $months = 12): void
+    {
+        $query->addSubSelect(
+            'average_usage_' . $months,
+            ArticleQuantityChangelog::select(DB::raw('COALESCE(ROUND(ABS(SUM(`change`)) / ' . $months . '), 0)'))
+                ->whereRaw('articles.id = article_quantity_changelogs.article_id')
+                ->whereIn('type', [ArticleQuantityChangelog::TYPE_OUTGOING, ArticleQuantityChangelog::TYPE_CORRECTION])
+                ->where('change', '<', 0)
+                ->where('created_at', '>', Carbon::now()->subMonth($months))
         );
     }
 
-    public function scopeWithLastReceipt($query) {
-        $query->addSubSelect('last_receipt', ArticleQuantityChangelog::select('created_at')
-            ->whereRaw('articles.id = article_quantity_changelogs.article_id')
-            ->where('type', ArticleQuantityChangelog::TYPE_INCOMING)
-            ->latest()
+     /**
+     * Scope a query to include the last receipt date.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return void
+     */
+    public function scopeWithLastReceipt($query): void
+    {
+        $query->addSubSelect(
+            'last_receipt',
+            ArticleQuantityChangelog::select('created_at')
+                ->whereRaw('articles.id = article_quantity_changelogs.article_id')
+                ->where('type', ArticleQuantityChangelog::TYPE_INCOMING)
+                ->latest()
         );
     }
 
-    public function scopeWithChangelogSumInDateRange($query, Carbon $start, Carbon $end, $type, $fieldname) {
+     /**
+     * Scope a query to include changelog sum within a date range.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param Carbon $start
+     * @param Carbon $end
+     * @param mixed $type
+     * @param string $fieldname
+     * @return void
+     */
+    public function scopeWithChangelogSumInDateRange($query, Carbon $start, Carbon $end, $type, string $fieldname): void
+    {
         $type = (!is_array($type)) ? [$type] : $type;
-        $query->addSubSelect($fieldname, ArticleQuantityChangelog::select(DB::raw('SUM(`change`)'))
-            ->whereNotIn('type', [ArticleQuantityChangelog::TYPE_REPLACEMENT_DELIVERY, ArticleQuantityChangelog::TYPE_OUTSOURCING])
-            ->whereRaw('articles.id = article_quantity_changelogs.article_id')
-            ->whereBetween('created_at', [$start, $end->copy()->endOfDay()])
-            ->whereIn('type', $type)
+        $query->addSubSelect(
+            $fieldname,
+            ArticleQuantityChangelog::select(DB::raw('SUM(`change`)'))
+                ->whereNotIn('type', [ArticleQuantityChangelog::TYPE_REPLACEMENT_DELIVERY, ArticleQuantityChangelog::TYPE_OUTSOURCING])
+                ->whereRaw('articles.id = article_quantity_changelogs.article_id')
+                ->whereBetween('created_at', [$start, $end->copy()->endOfDay()])
+                ->whereIn('type', $type)
         );
     }
 
-    public function getAllAudits() {
+     /**
+     * Retrieves all audits related to the article, including supplier article audits.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAllAudits()
+    {
         $previousArticleSupplierAudits = null;
         $articleSupplierAudits = $this->supplierArticles->map(function ($item) use (&$previousArticleSupplierAudits) {
             /* @var $item ArticleSupplier */
@@ -429,11 +637,15 @@ class Article extends AuditableModel
         return collect($audits->toArray())->merge($articleSupplierAudits)->sortByDesc('timestamp');
     }
 
-    /**
-     * @param $date
+     /**
+     * Retrieves the supplier article at a given date.
+     *
+     * @param Carbon|string $date
+     * @param bool $useEndOfDay
      * @return ArticleSupplier|null
      */
-    public function getSupplierArticleAtDate($date, $useEndOfDay = true) {
+    public function getSupplierArticleAtDate($date, bool $useEndOfDay = true): ?ArticleSupplier
+    {
         $date = ($date instanceof Carbon) ? $date : Carbon::parse($date);
 
         if ($useEndOfDay) {
@@ -469,11 +681,14 @@ class Article extends AuditableModel
     }
 
     /**
+     * Retrieves an attribute's value at a given date.
+     *
      * @param string $attribute
      * @param Carbon|string $date
      * @return mixed|null
      */
-    public function getAttributeAtDate($attribute, $date) {
+    public function getAttributeAtDate($attribute, $date)
+    {
         if ($attribute === 'quantity') {
             return $this->getQuantityAtDate($date);
         } else {
@@ -481,33 +696,44 @@ class Article extends AuditableModel
         }
     }
 
-    /**
-     * @param $query
+     /**
+     * Scope a query to include the article quantity at a specific date.  Uses a subquery.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param Carbon $date
-     * @param $fieldname
+     * @param string $fieldname
+     * @return void
      */
-    public function scopeWithQuantityAtDate($query, $date, $fieldname) {
-        $query->addSubSelect($fieldname, ArticleQuantityChangelog::select('new_quantity')
-            ->whereRaw('articles.id = article_quantity_changelogs.article_id')
-            ->whereIn('type', [ArticleQuantityChangelog::TYPE_START, ArticleQuantityChangelog::TYPE_CORRECTION, ArticleQuantityChangelog::TYPE_INCOMING, ArticleQuantityChangelog::TYPE_INVENTORY, ArticleQuantityChangelog::TYPE_OUTGOING, ArticleQuantityChangelog::TYPE_SALE_TO_THIRD_PARTIES, ArticleQuantityChangelog::TYPE_TRANSFER])
-            ->where('created_at', '<=', $date->copy()->endOfDay()->format('Y-m-d H:i:s'))
-            ->latest()
+    public function scopeWithQuantityAtDate($query, Carbon $date, string $fieldname): void
+    {
+        $query->addSubSelect(
+            $fieldname,
+            ArticleQuantityChangelog::select('new_quantity')
+                ->whereRaw('articles.id = article_quantity_changelogs.article_id')
+                ->whereIn('type', [
+                    ArticleQuantityChangelog::TYPE_START, ArticleQuantityChangelog::TYPE_CORRECTION,
+                    ArticleQuantityChangelog::TYPE_INCOMING, ArticleQuantityChangelog::TYPE_INVENTORY,
+                    ArticleQuantityChangelog::TYPE_OUTGOING, ArticleQuantityChangelog::TYPE_SALE_TO_THIRD_PARTIES,
+                    ArticleQuantityChangelog::TYPE_TRANSFER
+                ])
+                ->where('created_at', '<=', $date->copy()->endOfDay()->format('Y-m-d H:i:s'))
+                ->latest()
         );
     }
 
-    /**
+     /**
+     * Retrieves the article quantity at a specific date.
+     *
      * @param Carbon $date
      * @return int|mixed
      */
-    public function getQuantityAtDate($date) {
+    public function getQuantityAtDate(Carbon $date)
+    {
         $date = $date->endOfDay();
 
-        if (empty($fieldInSubquery)) {
-            $fieldInSubquery = 'current_quantity';
-            $article = Article::where('id', $this->id)->withQuantityAtDate($date, $fieldInSubquery)->first();
-        } else {
-            $article = $this;
-        }
+        $fieldInSubquery = 'current_quantity';
+        $article = Article::where('id', $this->id)->withQuantityAtDate($date, $fieldInSubquery)->first();
+
 
         if (!is_null($article->{$fieldInSubquery})) {
             return $article->{$fieldInSubquery};

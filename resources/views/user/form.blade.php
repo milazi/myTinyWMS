@@ -13,8 +13,8 @@
                 <div class="card-content">
                     {{ Form::bsText('name', null, [], __('Name')) }}
                     {{ Form::bsText('email', null, ($user->getSource() == \Mss\Models\User::SOURCE_LDAP ? ['disabled' => 'disabled'] : []), __('E-Mail')) }}
-                    {{ Form::bsText('username', null, ($user->getSource() == \Mss\Models\User::SOURCE_LDAP ? ['disabled' => 'disabled'] : []), __('Benutzername')) }}
-                    {{ Form::bsPassword('password', [], __('Passwort')) }}
+                    {{ Form::bsText('username', null, ($user->getSource() == \Mss\Models\User::SOURCE_LDAP ? ['disabled' => 'disabled'] : []), __('Username')) }}
+                    {{ Form::bsPassword('password', [], __('Password')) }}
 
                     <div class="form-group">
                         @yield('submit')
@@ -25,7 +25,7 @@
         <div class="w-1/3 ml-4">
             <div class="card">
                 <div class="card-header">
-                    <h5>@lang('Rollen')</h5>
+                    <h5>@lang('Roles')</h5>
                 </div>
                 <div class="card-content">
                     @foreach(\Spatie\Permission\Models\Role::all() as $role)

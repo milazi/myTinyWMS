@@ -1,16 +1,16 @@
 @extends('article_group.form')
 
-@section('title', __('Neue Artikelgruppe'))
+@section('title', __('New Article Group'))
 
 @section('breadcrumb')
     <li>
-        <a href="{{ route('article.index') }}">@lang('Artikel')</a>
+        <a href="{{ route('article.index') }}">@lang('Articles')</a>
     </li>
     <li>
-        <a href="{{ route('article-group.index') }}">@lang('Artikelgruppen verwalten')</a>
+        <a href="{{ route('article-group.index') }}">@lang('Manage Article Groups')</a>
     </li>
     <li class="active">
-        <strong>@lang('Neue Artikelgruppe')</strong>
+        <strong>@lang('New Article Group')</strong>
     </li>
 @endsection
 
@@ -19,5 +19,5 @@
 @endsection
 
 @section('submit')
-    {!! Form::submit(__('Speichern'), ['class' => 'btn btn-primary', 'id' => 'submit']) !!}
+    {!! Form::submit(__('Save'), ['class' => 'btn btn-primary', 'id' => 'submit']) !!}
 @endsection

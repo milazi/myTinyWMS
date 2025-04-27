@@ -26,35 +26,73 @@ class Category extends AuditableModel
     protected $dates = ['deleted_at'];
 
     protected $casts = [
-        'show_in_to_order_on_dashboard' => 'boolean'
+        'show_in_to_order_on_dashboard' => 'boolean' // Cast to boolean
     ];
 
-    public static function getFieldNames() {
+    /**
+     * Returns the field names for this model.
+     *
+     * @return array
+     */
+    public static function getFieldNames(): array
+    {
         return [
             'name' => __('Name'),
-            'notes' => __('Bemerkungen')
+            'notes' => __('Notes')
         ];
     }
 
-    public static function getAuditName() {
-        return __('Kategorie');
+    /**
+     * Returns the audit name for this model.
+     *
+     * @return string
+     */
+    public static function getAuditName(): string
+    {
+        return __('Category');
     }
 
-    public function articles() {
+    /**
+     * Defines the relationship with Article.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articles()
+    {
         return $this->hasMany(Article::class);
     }
 
-    public function scopeOrderedByName($query) {
+    /**
+     * Scope a query to order categories by name.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrderedByName($query)
+    {
         $query->orderBy('name');
     }
 
-    public function scopeWithActiveArticles($query) {
+     /**
+     * Scope a query to include active articles.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithActiveArticles($query)
+    {
         $query->with(['articles' => function ($query) {
             $query->enabled()->orderedByArticleNumber();
         }]);
     }
 
-    public function formShowInToOrderOnDashboardAttribute() {
+    /**
+     * Form access attribute for showing on dashboard.
+     *
+     * @return int
+     */
+    public function formShowInToOrderOnDashboardAttribute(): int
+    {
         return $this->show_in_to_order_on_dashboard ? 1 : 0;
     }
 }

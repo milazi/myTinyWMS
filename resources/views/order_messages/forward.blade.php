@@ -1,13 +1,13 @@
 @extends('layout.app')
 
-@section('title', __('Nachricht weiterleiten'))
+@section('title', __('Forward Message'))
 
 @section('breadcrumb')
     <li>
-        <a href="{{ route('order.index') }}">@lang('Übersicht')</a>
+        <a href="{{ route('order.index') }}">@lang('Overview')</a>
     </li>
     <li class="active">
-        <strong>@lang('Nachricht weiterleiten')</strong>
+        <strong>@lang('Forward Message')</strong>
     </li>
 @endsection
 
@@ -20,20 +20,20 @@
         {!! Form::open(['route' => ['order.message_forward', $message], 'method' => 'POST', 'id' => 'forwardMessageForm']) !!}
         <div class="card">
             <div class="card-header">
-                <h5>@lang('Nachricht weiterleiten') </h5>
+                <h5>@lang('Forward Message') </h5>
             </div>
             <div class="card-content">
-                {{ Form::bsText('receiver', $preSetReceiver, [], __('Empfänger (mehrere mit Komma getrennt)')) }}
-                {{ Form::bsText('subject', $preSetSubject, [], __('Betreff')) }}
+                {{ Form::bsText('receiver', $preSetReceiver, [], __('Recipient (multiple separated by comma)')) }}
+                {{ Form::bsText('subject', $preSetSubject, [], __('Subject')) }}
 
                 @if (!empty($message->htmlBody))
-                    {{ Form::wysiwygEditor('content', $message->htmlBody, [], __('Nachricht')) }}
+                    {{ Form::wysiwygEditor('content', $message->htmlBody, [], __('Message')) }}
                 @else
-                    {{ Form::wysiwygEditor('content', nl2br($message->textBody), [], __('Nachricht')) }}
+                    {{ Form::wysiwygEditor('content', nl2br($message->textBody), [], __('Message')) }}
                 @endif
 
                 <hr class="hr-line-solid">
-                {!! Form::submit(__('Abschicken'), ['class' => 'btn btn-primary', 'id' => 'send-message']) !!}
+                {!! Form::submit(__('Send'), ['class' => 'btn btn-primary', 'id' => 'send-message']) !!}
             </div>
         </div>
         {!! Form::close() !!}
@@ -41,7 +41,7 @@
     <div class="w-4/12">
         <div class="card">
             <div class="card-header">
-                <h5>@lang('Anhänge')</h5>
+                <h5>@lang('Attachments')</h5>
             </div>
             <div class="card-content">
                 @if($message->attachments->count())

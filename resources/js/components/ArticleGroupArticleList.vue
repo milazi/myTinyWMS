@@ -5,11 +5,11 @@
                 <div class="flex-1">
                     <div class="form-group">
                         <label class="form-label">
-                            {{ $t('Artikel') }}
+                            {{ $t('Article') }}
 
                             <dot-menu direction="right" class="article-menu">
-                                <a v-bind:class="{ 'm-l-md': (article.id), 'change-article': true }" @click.prevent="showArticleList(index)">{{ $t('Artikel ändern') }}</a>
-                                <a @click.prevent="removeArticle(index)" class="delete-article">{{ $t('Artikel löschen') }}</a>
+                                <a v-bind:class="{ 'm-l-md': (article.id), 'change-article': true }" @click.prevent="showArticleList(index)">{{ $t('Change article') }}</a>
+                                <a @click.prevent="removeArticle(index)" class="delete-article">{{ $t('Delete article') }}</a>
                             </dot-menu>
                         </label>
                         <div class="form-control-static article-name">
@@ -20,14 +20,14 @@
                 </div>
                 <div class="w-48 mr-4 text-right">
                     <div class="form-group">
-                        <label :for="'quantity_' + index" class="form-label">{{ $t('Menge') }}</label>
+                        <label :for="'quantity_' + index" class="form-label">{{ $t('Quantity') }}</label>
                         <input class="form-input text-right quantity-select" required="required" name="quantity[]" :id="'quantity_' + index" type="text" v-model="article.quantity">
                     </div>
                 </div>
             </div>
         </div>
         <input type="hidden" name="article_data" v-model="articleData">
-        <button class="btn btn-secondary btn-sm" id="add-article" @click.prevent="addArticle(true)">{{ $t('Artikel hinzufügen') }}</button>
+        <button class="btn btn-secondary btn-sm" id="add-article" @click.prevent="addArticle(true)">{{ $t('Add article') }}</button>
     </div>
 </template>
 

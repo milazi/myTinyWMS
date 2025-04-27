@@ -1,7 +1,7 @@
 <div class="w-full fixed pin-l pin-y z-20">
     @if(env('APP_DEBUG'))
-    <div class="fixed top-0 keft-0 m-2 p-3 text-xs font-mono text-white h-8 w-8 rounded-full flex items-center justify-center bg-gray-700 sm:bg-pink-500 md:bg-orange-500 lg:bg-green-500 xl:bg-blue-500 2xl:bg-red-500 3xl:bg-purple-500 4xl:bg-teal-500 print:hidden">
-        <div class="block  sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden 3xl:hidden 4xl:hidden">al</div>
+    <div class="fixed top-0 left-0 m-2 p-3 text-xs font-mono text-white h-8 w-8 rounded-full flex items-center justify-center bg-gray-700 sm:bg-pink-500 md:bg-orange-500 lg:bg-green-500 xl:bg-blue-500 2xl:bg-red-500 3xl:bg-purple-500 4xl:bg-teal-500 print:hidden">
+        <div class="block   sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden 3xl:hidden 4xl:hidden">al</div>
         <div class="hidden sm:block  md:hidden lg:hidden xl:hidden 2xl:hidden 3xl:hidden 4xl:hidden">sm</div>
         <div class="hidden sm:hidden md:block  lg:hidden xl:hidden 2xl:hidden 3xl:hidden 4xl:hidden">md</div>
         <div class="hidden sm:hidden md:hidden lg:block  xl:hidden 2xl:hidden 3xl:hidden 4xl:hidden">lg</div>
@@ -35,7 +35,7 @@
                             @endforeach
                         @else
                             <li>
-                                <div>@lang('Keine Nachrichten vorhanden')</div>
+                                <div>@lang('No messages available')</div>
                             </li>
                         @endif
                     </template>
@@ -46,14 +46,14 @@
                         <div class="flex items-center cursor-pointer mr-4 text-gray-500">
                             <a class="relative text-gray-500" href="#">
                                 <i class="fa fa-user-circle text-xl mr-1"></i>
-                                {{ \Illuminate\Support\Facades\Auth::user()->username }}
+                                 {{ \Illuminate\Support\Facades\Auth::user()->username }}
                             </a>
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                         </div>
                     </template>
 
                     <template v-slot:content>
-                        <li><a href="{{ route('settings.show') }}">Profil bearbeiten</a></li>
+                        <li><a href="{{ route('settings.show') }}">Edit profile</a></li>
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             @lang('Logout')
                         </a></li>
@@ -81,7 +81,7 @@
             @can('article.view')
             <h3 class="mr-4 lg:mr-6 {{ activeIfUri('article*') }}">
                 <a href="{{ url('/article') }}">
-                    @lang('Artikel')
+                    @lang('Articles')
                 </a>
             </h3>
             @endcan
@@ -89,7 +89,7 @@
             @can('order.view')
             <h3 class="mr-4 lg:mr-6 {{ activeIfUri('order*') }}">
                 <a href="{{ url('/order') }}" class="flex">
-                    @lang('Bestellungen')
+                    @lang('Orders')
                     @if($globalPageService->getUnreadMessageCount())
                         <div class="ml-1 lg:ml-2 inline-block bg-blue-700 text-white rounded-full text-center w-5 h-5 text-xs leading-none pt-1" title="{{ $globalPageService->getUnreadMessageCount() }} ungelesene {{ trans_choice('plural.message', $globalPageService->getUnreadMessageCount()) }}">{{ $globalPageService->getUnreadMessageCount() }}</div>
                     @endif
@@ -100,7 +100,7 @@
             @can('supplier.view')
             <h3 class="mr-4 lg:mr-6 {{ activeIfUri('supplier*') }}">
                 <a href="{{ url('/supplier') }}">
-                    @lang('Lieferanten')
+                    @lang('Suppliers')
                 </a>
             </h3>
             @endcan
@@ -108,7 +108,7 @@
             @can('inventory.view')
             <h3 class="mr-4 lg:mr-6 {{ activeIfUri('inventory*') }}">
                 <a href="{{ url('/inventory') }}">
-                    @lang('Inventur')
+                    @lang('Inventory')
                 </a>
             </h3>
             @endcan

@@ -1,13 +1,13 @@
 @extends('unit.form')
 
-@section('title', __('Inventur bearbeiten - gestartet am ').$inventory->created_at->format('d.m.Y H:i'))
+@section('title', __('Edit Inventory - started on ').$inventory->created_at->format('m/d/Y H:i'))
 
 @section('breadcrumb')
     <li>
-        <a href="{{ route('inventory.index') }}">@lang('Übersicht')</a>
+        <a href="{{ route('inventory.index') }}">@lang('Overview')</a>
     </li>
     <li class="active">
-        <strong>@lang('Inventur bearbeiten')</strong>
+        <strong>@lang('Edit Inventory')</strong>
     </li>
 @endsection
 

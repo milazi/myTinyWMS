@@ -19,29 +19,41 @@ class ArticleGroup extends AuditableModel
 {
     protected $fillable = ['name', 'external_article_number'];
 
-    public function items() {
+    /**
+     * Defines the relationship with ArticleGroupItem.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function items()
+    {
         return $this->hasMany(ArticleGroupItem::class);
     }
 
     /**
      * @inheritDoc
      */
-    public static function getAuditName()
+    public static function getAuditName(): string
     {
-        return __('Artikelgruppe');
+        return __('Article group');
     }
 
     /**
      * @inheritDoc
      */
-    public static function getFieldNames()
+    public static function getFieldNames(): array
     {
         return [
             'name' => __('Name')
         ];
     }
 
-    public function getArticleNumber() {
+    /**
+     * Generates a formatted article number.
+     *
+     * @return string
+     */
+    public function getArticleNumber(): string
+    {
         return sprintf("AG%08s\n", $this->id);
     }
 }

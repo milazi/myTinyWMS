@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', __('Passwort ändern'))
+@section('title', __('Change Password'))
 
 @section('content')
     <div class="row">
@@ -11,22 +11,22 @@
                         <div class="row">
 
                             <div class="m-b-lg">
-                                <label for="old_pw">@lang('altes Passwort')</label>
+                                <label for="old_pw">@lang('Old Password')</label>
                                 <input type="password" class="form-control" name="old_pw" id="old_pw" value="">
                             </div>
 
                             <div class="m-b-lg">
-                                <label for="new_pw">@lang('neues Passwort')</label>
+                                <label for="new_pw">@lang('New Password')</label>
                                 <input type="password" class="form-control" name="new_pw" id=new_pw" value="">
                             </div>
 
                             <div class="m-b-lg">
-                                <label for="new_pw2">@lang('neues Passwort wiederholen')</label>
+                                <label for="new_pw2">@lang('Repeat New Password')</label>
                                 <input type="password" class="form-control" name="new_pw2" id=new_pw2" value="">
                             </div>
 
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary">@lang('Speichern')</button>
+                            <button type="submit" class="btn btn-primary">@lang('Save')</button>
                         </div>
                     </form>
                 </div>

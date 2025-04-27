@@ -1,16 +1,16 @@
 @extends('article_group.form')
 
-@section('title', __('Artikelgruppe bearbeiten'))
+@section('title', __('Edit Article Group'))
 
 @section('breadcrumb')
     <li>
-        <a href="{{ route('article.index') }}">@lang('Artikel')</a>
+        <a href="{{ route('article.index') }}">@lang('Articles')</a>
     </li>
     <li>
-        <a href="{{ route('article-group.index') }}">@lang('Artikelgruppen verwalten')</a>
+        <a href="{{ route('article-group.index') }}">@lang('Manage Article Groups')</a>
     </li>
     <li class="active">
-        <strong>@lang('Artikelgruppe bearbeiten')</strong>
+        <strong>@lang('Edit Article Group')</strong>
     </li>
 @endsection
 
@@ -22,12 +22,12 @@
 
 @section('submit')
     @can('supplier-group.edit')
-    {!! Form::submit(__('Speichern'), ['class' => 'btn btn-primary', 'id' => 'submit']) !!}
+    {!! Form::submit(__('Save'), ['class' => 'btn btn-primary', 'id' => 'submit']) !!}
     @endcan
 @endsection
 
 @section('secondCol')
-    <collapse title="@lang('Logbuch')">
+    <collapse title="@lang('Logbook')">
         @include('components.audit_list', $audits)
     </collapse>
 @endsection

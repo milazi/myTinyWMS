@@ -1,16 +1,16 @@
 @extends('category.form')
 
-@section('title', __('Neue Kategorie'))
+@section('title', __('New Category'))
 
 @section('breadcrumb')
     <li>
         <a href="{{ route('admin.index') }}">@lang('Administrator')</a>
     </li>
     <li>
-        <a href="{{ route('category.index') }}">@lang('Kategorien Übersicht')</a>
+        <a href="{{ route('category.index') }}">@lang('Categories Overview')</a>
     </li>
     <li class="active">
-        <strong>@lang('Neue Kategorie')</strong>
+        <strong>@lang('New Category')</strong>
     </li>
 @endsection
 
@@ -19,5 +19,5 @@
 @endsection
 
 @section('submit')
-    {!! Form::submit(__('Speichern'), ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit(__('Save'), ['class' => 'btn btn-primary']) !!}
 @endsection

@@ -3,27 +3,27 @@
 @section('content')
     @if(env('APP_DEMO'))
         <div class="w-full max-w-lg bg-white border border-red-400 shadow-md rounded-lg px-8 pt-6 pb-8 mb-12">
-            <b>@lang('DEMO MODUS')</b>
+            <b>@lang('DEMO MODE')</b>
             <br>
             <br>
-            @lang('Benutzername und Passwort sind bereits ausgefüllt.')<br>
-            @lang('Loggen Sie sich einfach ein.')<br>
+            @lang('Username and password are pre-filled.')<br>
+            @lang('Just log in.')<br>
             <br>
-            @lang('Die Demo wird alle 24h zurück gesetzt.')<br>
+            @lang('The demo will be reset every 24 hours.')<br>
             <br>
-            @lang('Im Demo Modus werden keine E-Mails verschickt.')
+            @lang('No emails will be sent in demo mode.')
         </div>
     @endif
 
 
     <div class="w-full max-w-sm">
-        <h2 class="text-center mb-4">@lang('Willkommen bei') {{ env('APP_NAME') }}</h2>
+        <h2 class="text-center mb-4">@lang('Welcome to') {{ env('APP_NAME') }}</h2>
 
         <form class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4" action="{{ route('login') }}" method="post">
             {{ csrf_field() }}
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="login">
-                    @lang('Benutzername / E-Mail')
+                    @lang('Username / E-mail')
                 </label>
                 <input class="form-input {{ $errors->has('username') || $errors->has('email') ? ' has-error' : '' }}" id="login" name="login" value="{{ env('APP_DEMO') ? 'admin@example.com' : old('login') }}" type="text" placeholder="" required>
 
@@ -36,7 +36,7 @@
             </div>
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                    @lang('Passwort')
+                    @lang('Password')
                 </label>
                 <input class="form-input {{ $errors->has('password') ? ' has-error' : '' }}" value="{{ env('APP_DEMO') ? 'password' : '' }}" id="password" name="password" type="password" placeholder="" required>
 
@@ -49,7 +49,7 @@
                     @lang('Login')
                 </button>
                 <a class="btn-link text-sm" href="{{ route('password.request') }}">
-                    @lang('Passwort vergessen?')
+                    @lang('Forgot your password?')
                 </a>
             </div>
         </form>

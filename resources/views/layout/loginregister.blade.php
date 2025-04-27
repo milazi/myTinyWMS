@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-full font-sans-nunito antialiased">
+<html class="h-full font-sans-nunito antialiased" lang="en">
 
     <head>
 

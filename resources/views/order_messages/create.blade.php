@@ -1,16 +1,16 @@
 @extends('layout.app')
 
-@section('title', __('Neue Nachricht'))
+@section('title', __('New Message'))
 
 @section('breadcrumb')
     <li>
-        <a href="{{ route('order.index') }}">@lang('Übersicht')</a>
+        <a href="{{ route('order.index') }}">@lang('Overview')</a>
     </li>
     <li>
-        <a href="{{ route('order.show', $order) }}">@lang('Bestelldetails')</a>
+        <a href="{{ route('order.show', $order) }}">@lang('Order Details')</a>
     </li>
     <li class="active">
-        <strong>@lang('Neue Nachricht')</strong>
+        <strong>@lang('New Message')</strong>
     </li>
 @endsection
 
@@ -23,17 +23,17 @@
         {!! Form::open(['route' => ['order.message_create', $order], 'method' => 'POST', 'id' => 'newMessageForm']) !!}
         <div class="card">
             <div class="card-header">
-                <h5>@lang('Neue Nachricht an') {{ $order->supplier->name }}</h5>
+                <h5>@lang('New message to') {{ $order->supplier->name }}</h5>
             </div>
             <div class="card-content">
-                {{ Form::bsText('receiver', $preSetReceiver ?: str_replace(';', ',', $order->supplier->email), [], __('Empfänger (mehrere mit Komma getrennt)')) }}
-                {{ Form::bsText('subject', $preSetSubject, [], __('Betreff')) }}
-                {{ Form::wysiwygEditor('body', $preSetBody, [], __('Nachricht')) }}
+                {{ Form::bsText('receiver', $preSetReceiver ?: str_replace(';', ',', $order->supplier->email), [], __('Recipient (multiple separated by comma)')) }}
+                {{ Form::bsText('subject', $preSetSubject, [], __('Subject')) }}
+                {{ Form::wysiwygEditor('body', $preSetBody, [], __('Message')) }}
 
                 <hr class="hr-line-solid">
                 {!! Form::hidden('attachments') !!}
                 {!! Form::hidden('sendOrder', $sendOrder) !!}
-                {!! Form::submit(__('Abschicken'), ['class' => 'btn btn-primary', 'id' => 'send-message']) !!}
+                {!! Form::submit(__('Send'), ['class' => 'btn btn-primary', 'id' => 'send-message']) !!}
             </div>
         </div>
         {!! Form::close() !!}
@@ -41,11 +41,11 @@
     <div class="w-4/12">
         <div class="card">
             <div class="card-header">
-                <h5>@lang('Anhänge')</h5>
+                <h5>@lang('Attachments')</h5>
             </div>
             <div class="card-content">
                 @if(!config('app.demo'))
-                    {{ Form::dropzone('attachments', __('Anhänge'), route('order.message_upload', $order)) }}
+                    {{ Form::dropzone('attachments', __('Attachments'), route('order.message_upload', $order)) }}
                 @endif
             </div>
         </div>

@@ -20,7 +20,7 @@
         <div class="w-1/3 ml-4">
             <div class="card">
                 <div class="card-header">
-                    <h5>@lang('Rollen')</h5>
+                    <h5>@lang('Roles')</h5>
                 </div>
                 <div class="card-content">
                     @foreach(\Spatie\Permission\Models\Permission::all() as $permission)

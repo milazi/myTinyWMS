@@ -1,16 +1,16 @@
 @extends('user.form')
 
-@section('title', __('Benutzer bearbeiten'))
+@section('title', __('Edit User'))
 
 @section('breadcrumb')
     <li>
         <a href="{{ route('admin.index') }}">@lang('Administrator')</a>
     </li>
     <li>
-        <a href="{{ route('user.index') }}">@lang('Benutzer Übersicht')</a>
+        <a href="{{ route('user.index') }}">@lang('Users Overview')</a>
     </li>
     <li class="active">
-        <strong>@lang('Benutzer bearbeiten')</strong>
+        <strong>@lang('Edit User')</strong>
     </li>
 @endsection
 
@@ -19,5 +19,5 @@
 @endsection
 
 @section('submit')
-    {!! Form::submit(__('Speichern'), ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit(__('Save'), ['class' => 'btn btn-primary']) !!}
 @endsection
